@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<title>Edit</title>
+<head>
+    <link href="/css/blog.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+        function replace()
+        {
+            var content = document.getElementsByName("content")[0].value;
+            content = content.replace(/\n/g, '<br>');
+            content = content.replace(/\r/g, '<br>');
+            content = content.replace(/\r\n/g, '<br>');
+            document.getElementsByName("content")[0].value = content;
+            return content;
+        }
+        
+        function display()
+        {
+            var content = document.getElementsById("edit-text").innerHTML;
+            content = content.replace(/<br>/g, '\n');
+            document.getElementsById("edit-text").innerHTML = content;
+        }
+    </script>
+</head>
+<body>
+<div id="edit">
+<script type="text/python">
+    if not Tdict['date']:
+        echo '<form method="post" action="/blog/post">'
+    else:
+        echo '<form method="post" action="/blog/post/%s">' % str(Tdict['id'])
+</script>
+    <div id="edit-left">
+    <p id="edit-head">
+        <input id="edit-title" name="title" value="{$ title $}" type="text" />
+<script type="text/python">
+    if Tdict['date']:
+        echo '<span id="edit-time">上次发布时间 %s</span>' % Tdict['date']
+</script>
+    </p>
+        <textarea id="edit-text" name="content" onload=" ">{$ content $}</textarea>
+    </div>
+    <div id="edit-side">
+    <p id="edit-navs">
+        分类 
+        <input id="edit-category" name="category" type="text" value="{$ category $}"/>
+        标签 
+        <input id="edit-tags" name="tags" type="text" value="{$ tags $}"/>
+        <input id="edit-submit" value="发布" type="submit" onclick=" "/>
+    </p>
+    </div>
+    </form>
+</div>
+</body>
+</html>

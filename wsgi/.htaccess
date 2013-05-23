@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^application/(css|js|html|jpg|png)/(.*) /static/$1/$2
+</IfModule>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<title>
+好的
+</title>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
+    <script type="text/javascript">
+        function clickme()
+        {
+            alert("你点我了");
+        }
+
+       function clocktime()
+       {
+           var d = new Date();
+           year = d.getFullYear();
+           month = d.getMonth();
+           day = d.getDate();
+           hour = d.getHours();
+           min = d.getMinutes();
+           second = d.getSeconds();
+           //min = checktime(min);
+           //second = checktime(second);
+           if(second < 10) {
+               second = "0" + second;
+           }
+           if(min < 10) {
+               min = "0" + min;
+           }
+           document.getElementById('time').innerHTML=year+'-'+month+'-'+day+' '+hour+':'+min+':'+second;
+           t = setTimeout("clocktime()", 500);
+       }
+       function checktime(i)
+       {
+           if(i < 10)
+           {
+               i = "0" + i;
+           }
+           return i;
+       }
+    </script>
+</head>
+<body onload="clocktime()">
+<div id="home">
+<div id="back">
+<h1>test html</h1>
+<h1>values: {$ val $}</h1>
+<script type="text/python">
+    import time
+    echo "%s" % time.strftime('%Y-%m-%d %H:%M:%S')
+</script>
+<script type="text/javascript">
+    //setTimeout("self.location.reload();", 100000)
+</script>
+<table id="ip_table">
+  <tbody>
+    <tr>
+      <th>ip</th>
+    </tr>
+    <tr>
+      <td>{$ ip $}</td>
+    </tr>
+  </tbody>
+</table>
+<input id="click" type="button" value="点我" onclick="clickme()" />
+<div id="blink">
+<script type="text/javascript">
+    var msg = "hello world!";
+    document.write(msg.blink());
+</script>
+</div>
+<div id='time'></div>
+</div>
+</div>
+</body>
+</html>

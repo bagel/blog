@@ -1,0 +1,27 @@
+#ip_table {
+    border: 1px solid #b4e391;
+    font: 250%;
+    margin-top: 10px;
+    border-width: 5px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#ip_table td {
+    border-top: 1px solid #b4e391;
+    border-width: 2px;
+    padding: 5px;
+}
+
+h1 {
+    font-size: 10px;
+}
+
+#back {
+    background: url('/image/grass.png') no-repeat scroll center bottom transparent;
+    height: 650px;
+}
+
+#home {
+    background: -moz-linear-gradient(center top , #C9DBE9 0%, #FFFFFF 100%) repeat scroll 0 0 transparent;
+}

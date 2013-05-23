@@ -1,0 +1,92 @@
+<!doctype html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<title>无名陋室</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/blog.css" />
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=appkey" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="home">
+<div id="header">
+<h1><a id="header-title" href="http://{$ url $}">无名陋室</a></h1>
+<p>不要忘记自己的无知和愚蠢</p>
+<div id="main-nav">
+    <ul>
+        <li><a href="/blog">Home</a></li>
+        <li><a href="/blog/about">About</a></li>
+    </ul>
+</div>
+</div>
+<div id="content">
+<div id="content-body">
+<script type="text/python">
+    import urllib
+    import time
+    import re
+    blog = Tdict['blog']
+    ids = blog.keys()
+    ids.reverse()
+    for id in ids:
+        date, title, content, category, tags = blog[id][1:]
+        content_list = list()
+        for line in content.split('\n'):
+            tail = line.lstrip(' ')
+            head = line[:line.find(tail)]
+            head = head.replace(' ', '&nbsp;')
+            line = head + tail
+            content_list.append(line)
+        content = '<br>'.join(content_list)
+        echo '<div id="blog">'
+        echo '''<div id="blog-header"><p>
+  <a id="blog-title" href="/blog/%d">%s</a>
+<span id="blog-date">发表于 %s</span>
+</p></div>''' % (id, title, date)
+        echo '<div id="blog-content">%s</div>' % content
+        echo '<div id="blog-footer"><p>'
+        if category:
+            echo '<span id="blog-category">分类: %s</span>' % category
+        if tags:
+            echo '<span id="blog-tags">标签: %s</span>' % tags
+        echo '<span id="blog-comment"><a href="http://%s/%d#comment">评论</a></span>' % (Tdict['url'], id)
+        qdict = {'type': 3, 'url': 'http://%s/%d' % (Tdict['url'], id), 'title': title, 'rnd': int(time.time())}
+        echo '''<iframe id="blog-share" allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?%s"></iframe>''' % urllib.urlencode(qdict)
+        echo '</p></div>'
+        if re.match('/blog/\d+', Tdict['path']):
+            echo '<div id="comment">'
+            echo '<wb:comments url="http://%s/%d" width="auto" ></wb:comments>' % (Tdict['url'], id)
+            echo '</div>'
+        echo '</div>'
+</script>
+<div id="page-nav">
+    <ul>
+<script type="text/python">
+    path = Tdict.get('path', '')
+    sum = Tdict.get('sum', '')
+    page = int(Tdict.get('page', 0))
+    if path and sum and page:
+        for i in xrange(1, sum/10+2):
+            if i == page:
+                echo '<li>%s</li>' % i
+            else:
+                echo '<li><a href="/blog/%s/%s">%s</a></li>' % (path, i, i)
+</script>
+    </ul>
+</div>
+</div>
+<div id="content-side">
+<div id="side-info">
+欢迎关注@皇帝换新装
+</div>
+<iframe id="side-show"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1677588721&verifier=857d834c&dpc=1"></iframe>
+</div>
+</div>
+<div id="footer">
+<p>
+<span id="copy">Copyright &copy; 2013</span>
+<span id="visitor">{$ count $} visitor {$ ip $}</span>
+</p>
+</div>
+</div>
+</body>
+</html>
